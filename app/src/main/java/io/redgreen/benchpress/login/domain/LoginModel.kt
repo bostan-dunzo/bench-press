@@ -1,4 +1,4 @@
-package io.redgreen.benchpress.login
+package io.redgreen.benchpress.login.domain
 
 import io.redgreen.benchpress.architecture.AsyncOp
 import io.redgreen.benchpress.architecture.AsyncOp.*
@@ -12,7 +12,10 @@ data class LoginModel(
         get() = email.isValid() && password.isValid()
 
     companion object {
-        val BLANK = LoginModel(Email(""), Password(""))
+        val BLANK = LoginModel(
+            Email(""),
+            Password("")
+        )
     }
 
     fun emailChanged(email: String): LoginModel {

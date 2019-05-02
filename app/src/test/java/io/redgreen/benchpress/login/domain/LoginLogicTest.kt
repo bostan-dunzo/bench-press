@@ -1,14 +1,16 @@
-package io.redgreen.benchpress.login
+package io.redgreen.benchpress.login.domain
 
 import com.spotify.mobius.test.NextMatchers.*
 import com.spotify.mobius.test.UpdateSpec
 import com.spotify.mobius.test.UpdateSpec.assertThatNext
-import io.redgreen.benchpress.login.LoginEffect.AttemptLogin
-import io.redgreen.benchpress.login.LoginEvent.*
+import io.redgreen.benchpress.login.domain.LoginEffect.AttemptLogin
+import io.redgreen.benchpress.login.domain.LoginEvent.*
 import org.junit.Test
 
 class LoginLogicTest {
-    private val updateSpec = UpdateSpec<LoginModel, LoginEvent, LoginEffect>(LoginLogic)
+    private val updateSpec = UpdateSpec<LoginModel, LoginEvent, LoginEffect>(
+        LoginLogic
+    )
     private val blankModel = LoginModel.BLANK
 
     @Test

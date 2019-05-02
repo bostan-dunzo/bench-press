@@ -1,4 +1,4 @@
-package io.redgreen.benchpress.login
+package io.redgreen.benchpress.login.domain
 
 sealed class LoginEvent {
     data class EmailChanged(val email: String): LoginEvent()

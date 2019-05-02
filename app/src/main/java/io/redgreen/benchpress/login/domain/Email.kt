@@ -1,4 +1,4 @@
-package io.redgreen.benchpress.login
+package io.redgreen.benchpress.login.domain
 
 data class Email(val value: String) {
     fun isValid(): Boolean {

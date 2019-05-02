@@ -1,4 +1,4 @@
-package io.redgreen.benchpress.login
+package io.redgreen.benchpress.login.domain
 
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test

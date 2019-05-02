@@ -1,11 +1,11 @@
-package io.redgreen.benchpress.login
+package io.redgreen.benchpress.login.domain
 
 import com.spotify.mobius.Next
 import com.spotify.mobius.Next.next
 import com.spotify.mobius.Update
-import io.redgreen.benchpress.login.LoginEffect.AttemptLogin
-import io.redgreen.benchpress.login.LoginEffect.GotoHome
-import io.redgreen.benchpress.login.LoginEvent.*
+import io.redgreen.benchpress.login.domain.LoginEffect.AttemptLogin
+import io.redgreen.benchpress.login.domain.LoginEffect.GotoHome
+import io.redgreen.benchpress.login.domain.LoginEvent.*
 
 object LoginLogic : Update<LoginModel, LoginEvent, LoginEffect> {
     override fun update(model: LoginModel, event: LoginEvent): Next<LoginModel, LoginEffect> {
