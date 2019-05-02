@@ -5,6 +5,7 @@ import com.spotify.mobius.test.NextMatchers.hasNoEffects
 import com.spotify.mobius.test.UpdateSpec
 import com.spotify.mobius.test.UpdateSpec.assertThatNext
 import io.redgreen.benchpress.login.LoginEvent.EmailChanged
+import io.redgreen.benchpress.login.LoginEvent.PasswordChanged
 import org.junit.Test
 
 class LoginLogicTest {
@@ -32,7 +33,7 @@ class LoginLogicTest {
 
         updateSpec
             .given(blankModel)
-            .`when`(LoginEvent.PasswordChanged(password))
+            .`when`(PasswordChanged(password))
             .then(
                 assertThatNext(
                     hasModel(blankModel.passwordChanged(password)),

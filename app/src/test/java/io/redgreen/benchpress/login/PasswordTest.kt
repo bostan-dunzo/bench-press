@@ -1,7 +1,6 @@
 package io.redgreen.benchpress.login
 
-import com.google.common.truth.Truth
-import com.google.common.truth.Truth.*
+import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 
 class PasswordTest {
