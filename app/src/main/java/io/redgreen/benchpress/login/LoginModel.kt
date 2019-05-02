@@ -1,8 +1,7 @@
 package io.redgreen.benchpress.login
 
 import io.redgreen.benchpress.architecture.AsyncOp
-import io.redgreen.benchpress.architecture.AsyncOp.IDLE
-import io.redgreen.benchpress.architecture.AsyncOp.IN_FLIGHT
+import io.redgreen.benchpress.architecture.AsyncOp.*
 
 data class LoginModel(
     val email: Email,
@@ -26,5 +25,13 @@ data class LoginModel(
 
     fun attemptLogin(): LoginModel {
         return copy(loginAsyncOp = IN_FLIGHT)
+    }
+
+    fun loginSuccessful(): LoginModel {
+        return copy(loginAsyncOp = SUCCEEDED)
+    }
+
+    fun loginFailed(): LoginModel {
+        return copy(loginAsyncOp = FAILED)
     }
 }

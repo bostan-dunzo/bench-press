@@ -58,4 +58,45 @@ class LoginLogicTest {
                 )
             )
     }
+
+    @Test
+    fun `user can goto home screen if login is successful`() {
+        val attemptLoginModel = LoginModel
+            .BLANK
+            .emailChanged("test@test.com")
+            .passwordChanged("super-secret")
+            .attemptLogin()
+
+        updateSpec
+            .given(attemptLoginModel)
+            .`when`(LoginSucceeded)
+            .then(
+                assertThatNext(
+                    hasModel(attemptLoginModel.loginSuccessful()),
+                    hasEffects(LoginEffect.GotoHome as LoginEffect)
+                )
+            )
+    }
+
+    @Test
+    fun `show error if login failed`() {
+
+        val attemptLoginModel = LoginModel
+            .BLANK
+            .emailChanged("test@test.com")
+            .passwordChanged("super-secret")
+            .attemptLogin()
+
+        updateSpec
+            .given(attemptLoginModel)
+            .`when`(LoginFailed)
+            .then(
+                assertThatNext(
+                    hasModel(attemptLoginModel.loginFailed()),
+                    hasNoEffects()
+                )
+            )
+    }
+
+
 }

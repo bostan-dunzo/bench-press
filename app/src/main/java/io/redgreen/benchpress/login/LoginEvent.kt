@@ -6,4 +6,8 @@ sealed class LoginEvent {
     data class PasswordChanged(val password: String): LoginEvent()
 
     object LoginAttempted : LoginEvent()
+
+    object LoginSucceeded : LoginEvent()
+
+    object LoginFailed : LoginEvent()
 }
