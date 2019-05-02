@@ -8,10 +8,11 @@ import io.redgreen.benchpress.login.LoginEvent.EmailChanged
 import org.junit.Test
 
 class LoginLogicTest {
+    private val updateSpec = UpdateSpec<LoginModel, LoginEvent, LoginEffect>(LoginLogic)
+    private val blankModel = LoginModel.BLANK
+
     @Test
     fun `user can enter email`() {
-        val updateSpec = UpdateSpec<LoginModel, LoginEvent, LoginEffect>(LoginLogic)
-        val blankModel = LoginModel.BLANK
         val email = "test@gmail.com"
 
         updateSpec
@@ -20,6 +21,21 @@ class LoginLogicTest {
             .then(
                 assertThatNext(
                     hasModel(blankModel.emailChanged(email)),
+                    hasNoEffects()
+                )
+            )
+    }
+
+    @Test
+    fun `user can enter password`() {
+        val password = "password"
+
+        updateSpec
+            .given(blankModel)
+            .`when`(LoginEvent.PasswordChanged(password))
+            .then(
+                assertThatNext(
+                    hasModel(blankModel.passwordChanged(password)),
                     hasNoEffects()
                 )
             )
