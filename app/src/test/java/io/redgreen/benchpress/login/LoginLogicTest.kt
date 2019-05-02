@@ -1,11 +1,10 @@
 package io.redgreen.benchpress.login
 
-import com.spotify.mobius.test.NextMatchers.hasModel
-import com.spotify.mobius.test.NextMatchers.hasNoEffects
+import com.spotify.mobius.test.NextMatchers.*
 import com.spotify.mobius.test.UpdateSpec
 import com.spotify.mobius.test.UpdateSpec.assertThatNext
-import io.redgreen.benchpress.login.LoginEvent.EmailChanged
-import io.redgreen.benchpress.login.LoginEvent.PasswordChanged
+import io.redgreen.benchpress.login.LoginEffect.AttemptLogin
+import io.redgreen.benchpress.login.LoginEvent.*
 import org.junit.Test
 
 class LoginLogicTest {
@@ -38,6 +37,24 @@ class LoginLogicTest {
                 assertThatNext(
                     hasModel(blankModel.passwordChanged(password)),
                     hasNoEffects()
+                )
+            )
+    }
+
+    @Test
+    fun `user can attempt login`() {
+        val readyForLoginModel = LoginModel
+            .BLANK
+            .emailChanged("test@gmail.com")
+            .passwordChanged("super-secret")
+
+        updateSpec
+            .given(readyForLoginModel)
+            .`when`(LoginAttempted)
+            .then(
+                assertThatNext(
+                    hasModel(readyForLoginModel.attemptLogin()),
+                    hasEffects(AttemptLogin("test@gmail.com", "super-secret") as LoginEffect)
                 )
             )
     }
