@@ -4,6 +4,9 @@ data class LoginModel(
     val email: Email,
     val password: Password
 ) {
+    val isReadyForLogin: Boolean
+        get() = email.isValid() && password.isValid()
+
     companion object {
         val BLANK = LoginModel(Email(""), Password(""))
     }
