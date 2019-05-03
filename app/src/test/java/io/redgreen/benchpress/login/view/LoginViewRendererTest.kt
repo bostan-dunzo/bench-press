@@ -38,13 +38,36 @@ class LoginViewRendererTest {
 
     @Test
     fun `it can render valid state`() {
+        // given
         val validModel = blankModel
             .emailChanged("test@test.com")
             .passwordChanged("123456789")
 
+        // when
         renderer.render(validModel)
 
+        // then
         verify(view).enableSubmitButton()
+        verifyNoMoreInteractions(view)
+    }
+
+    @Test
+    fun `it can render loading state`() {
+        // given
+        val attemptLoginModel = blankModel
+            .emailChanged("test@test.com")
+            .passwordChanged("123456789")
+            .attemptLogin()
+
+        // when
+        renderer.render(attemptLoginModel)
+
+        // then
+        verify(view).disableEmailField()
+        verify(view).disablePasswordField()
+        verify(view).disableSubmitButton()
+        verify(view).showLoading()
+        verify(view).hideLoginFailedError()
         verifyNoMoreInteractions(view)
     }
 }
