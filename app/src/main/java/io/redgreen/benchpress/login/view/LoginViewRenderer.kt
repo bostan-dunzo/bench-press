@@ -8,6 +8,8 @@ class LoginViewRenderer(
     fun render(model: LoginModel) {
         if (model == LoginModel.BLANK || !model.isReadyForLogin) {
             view.disableSubmitButton()
+        }else if(model.isReadyForLogin){
+            view.enableSubmitButton()
         }
     }
 }

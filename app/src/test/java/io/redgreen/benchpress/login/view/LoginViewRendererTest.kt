@@ -35,4 +35,16 @@ class LoginViewRendererTest {
         verify(view).disableSubmitButton()
         verifyNoMoreInteractions(view)
     }
+
+    @Test
+    fun `it can render valid state`() {
+        val validModel = blankModel
+            .emailChanged("test@test.com")
+            .passwordChanged("123456789")
+
+        renderer.render(validModel)
+
+        verify(view).enableSubmitButton()
+        verifyNoMoreInteractions(view)
+    }
 }
