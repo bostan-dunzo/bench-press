@@ -1,6 +1,6 @@
 package io.redgreen.benchpress.login.view
 
-import io.redgreen.benchpress.architecture.AsyncOp.IN_FLIGHT
+import io.redgreen.benchpress.architecture.AsyncOp.*
 import io.redgreen.benchpress.login.domain.LoginModel
 
 class LoginViewRenderer(
@@ -13,6 +13,14 @@ class LoginViewRenderer(
             view.disableSubmitButton()
             view.showLoading()
             view.hideLoginFailedError()
+        } else if (model.loginAsyncOp == SUCCEEDED) {
+            view.hideLoading()
+        } else if (model.loginAsyncOp == FAILED) {
+            view.hideLoading()
+            view.showLoginFailedError()
+            view.enablePassword()
+            view.enableEmail()
+            view.enableSubmitButton()
         } else if (model == LoginModel.BLANK || !model.isReadyForLogin) {
             view.disableSubmitButton()
         } else if (model.isReadyForLogin) {

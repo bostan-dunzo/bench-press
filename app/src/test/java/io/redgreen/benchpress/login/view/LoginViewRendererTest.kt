@@ -70,4 +70,38 @@ class LoginViewRendererTest {
         verify(view).hideLoginFailedError()
         verifyNoMoreInteractions(view)
     }
+
+    @Test
+    fun `it can render login success state`(){
+        // given
+        val loginSuccessModel = blankModel
+            .emailChanged("test@test.com")
+            .passwordChanged("123456789")
+            .loginSuccessful()
+
+        // when
+        renderer.render(loginSuccessModel)
+
+        verify(view).hideLoading()
+        verifyNoMoreInteractions(view)
+    }
+
+    @Test
+    fun `it can render login failed state`() {
+        // given
+        val loginFailedModel = blankModel
+            .emailChanged("test@test.com")
+            .passwordChanged("123456789")
+            .loginFailed()
+
+        //when
+        renderer.render(loginFailedModel)
+
+        verify(view).hideLoading()
+        verify(view).showLoginFailedError()
+        verify(view).enableEmail()
+        verify(view).enablePassword()
+        verify(view).enableSubmitButton()
+    }
+
 }

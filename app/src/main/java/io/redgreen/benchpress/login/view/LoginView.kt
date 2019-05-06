@@ -7,4 +7,8 @@ interface LoginView {
     fun disablePasswordField()
     fun showLoading()
     fun hideLoginFailedError()
+    fun hideLoading()
+    fun showLoginFailedError()
+    fun enableEmail()
+    fun enablePassword()
 }
